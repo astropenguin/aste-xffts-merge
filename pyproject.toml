@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "aste-xffts-merge"
+version = "0.1.0"
+description = "Merge datasets obtained by the ASTE-XFFTS system into a single file"
+authors = ["Akio Taniguchi <taniguchi@a.phys.nagoya-u.ac.jp>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/astropenguin/aste-xffts-merge"
+
+[tool.poetry.dependencies]
+python = ">= 3.8, < 3.9"
+
+[tool.poetry.dev-dependencies]
+black = "^21.7b"
+flake8 = "^3.9"
+ipython = "^7.25"
+pytest = "^6.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
