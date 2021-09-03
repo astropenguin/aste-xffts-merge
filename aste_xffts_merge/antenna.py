@@ -11,7 +11,7 @@ from typing import Tuple, Union
 # dependencies
 import pandas as pd
 import xarray as xr
-from xarray_dataclasses import AsDataset, Attr, Coordof, Data, Dataof, Name
+from xarray_dataclasses import AsDataset, Attr, Coordof, Data, Dataof
 
 
 # submodules
@@ -29,7 +29,8 @@ class Azimuth:
     """Representation of antenna azimuth."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
-    name: Name[str] = readonly("Azimuth")
+    long_name: Attr[str] = readonly("Antenna azimuth")
+    standard_name: Attr[str] = readonly("Azimuth")
     units: Attr[str] = readonly("degree")
 
 
@@ -38,7 +39,8 @@ class Elevation:
     """Representation of antenna elevation."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
-    name: Name[str] = readonly("Elevation")
+    long_name: Attr[str] = readonly("Antenna elevation")
+    standard_name: Attr[str] = readonly("Elevation")
     units: Attr[str] = readonly("degree")
 
 
@@ -47,7 +49,8 @@ class Longitude:
     """Representation of sky longitude."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
-    name: Name[str] = readonly("Longitude")
+    long_name: Attr[str] = readonly("Sky longitude")
+    standard_name: Attr[str] = readonly("Longitude")
     units: Attr[str] = readonly("degree")
 
 
@@ -56,7 +59,8 @@ class Latitude:
     """Representation of sky latitude."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
-    name: Name[str] = readonly("Latitude")
+    long_name: Attr[str] = readonly("Sky latitude")
+    standard_name: Attr[str] = readonly("Latitude")
     units: Attr[str] = readonly("degree")
 
 
@@ -65,7 +69,8 @@ class RefLongitude:
     """Representation of reference sky longitude."""
 
     data: Data[Tuple[()], float] = DEFAULT_FLOAT
-    name: Name[str] = readonly("Reference longitude")
+    long_name: Attr[str] = readonly("Reference sky longitude")
+    standard_name: Attr[str] = readonly("Ref. longitude")
     units: Attr[str] = readonly("degree")
 
 
@@ -74,7 +79,8 @@ class RefLatitude:
     """Representation of reference sky latitude."""
 
     data: Data[Tuple[()], float] = DEFAULT_FLOAT
-    name: Name[str] = readonly("Reference latitude")
+    long_name: Attr[str] = readonly("Reference sky latitude")
+    standard_name: Attr[str] = readonly("Ref. latitude")
     units: Attr[str] = readonly("degree")
 
 

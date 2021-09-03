@@ -7,7 +7,7 @@ from typing import Any, Literal, TypeVar
 
 
 # dependencies
-from xarray_dataclasses import Data, Name
+from xarray_dataclasses import Attr, Data
 
 
 # constants
@@ -36,7 +36,8 @@ class TimeAxis:
     """Representation of the time axis (in UTC)."""
 
     data: Data[Time, DT64] = DEFAULT_TIME
-    name: Name[str] = readonly("Time")
+    long_name: Attr[str] = readonly("Observed time")
+    standard_name: Attr[str] = readonly("Time")
 
 
 @dataclass
@@ -44,4 +45,5 @@ class ChanAxis:
     """Representation of the channel axis."""
 
     data: Data[Chan, int] = DEFAULT_INT
-    name: Name[str] = readonly("Channel")
+    long_name: Attr[str] = readonly("Channel ID")
+    standard_name: Attr[str] = readonly("Channel")
