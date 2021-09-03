@@ -61,6 +61,24 @@ class Latitude:
 
 
 @dataclass
+class RefLongitude:
+    """Representation of reference sky longitude."""
+
+    data: Data[Tuple[()], float] = DEFAULT_FLOAT
+    name: Name[str] = readonly("Reference longitude")
+    units: Attr[str] = readonly("degree")
+
+
+@dataclass
+class RefLatitude:
+    """Representation of reference sky latitude."""
+
+    data: Data[Tuple[()], float] = DEFAULT_FLOAT
+    name: Name[str] = readonly("Reference latitude")
+    units: Attr[str] = readonly("degree")
+
+
+@dataclass
 class Antenna(AsDataset):
     """Representation of antenna log."""
 
@@ -76,10 +94,10 @@ class Antenna(AsDataset):
     latitude: Dataof[Latitude] = DEFAULT_FLOAT
     """Sky latitude (in degree)."""
 
-    ref_longitude: Data[Tuple[()], float] = DEFAULT_FLOAT
+    ref_longitude: Dataof[RefLongitude] = DEFAULT_FLOAT
     """Reference sky longitude (in degree)."""
 
-    ref_latitude: Data[Tuple[()], float] = DEFAULT_FLOAT
+    ref_latitude: Dataof[RefLatitude] = DEFAULT_FLOAT
     """Reference sky latitude (in degree)."""
 
     frame: Data[Tuple[()], str] = "ICRS"
