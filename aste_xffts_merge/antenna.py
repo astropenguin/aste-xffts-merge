@@ -3,15 +3,24 @@
 
 # standard library
 from dataclasses import dataclass
-from typing import Tuple
+from functools import partial
+from pathlib import Path
+from typing import Tuple, Union
 
 
 # dependencies
+import pandas as pd
+import xarray as xr
 from xarray_dataclasses import AsDataset, Attr, Coordof, Data, Dataof, Name
 
 
 # submodules
-from common import DEFAULT_FLOAT, DEFAULT_TIME, readonly, Time, TimeAxis
+from .common import DEFAULT_FLOAT, DEFAULT_TIME, readonly, Time, TimeAxis
+
+
+# constants
+LOG_COLUMNS = "time", "longitude", "latitude", "azimuth", "elevation"
+LOG_TIMEFMT = "%y%m%d%H%M%S.%f"
 
 
 # dataclasses
@@ -78,3 +87,45 @@ class Antenna(AsDataset):
 
     t: Coordof[TimeAxis] = DEFAULT_TIME
     """Observed time (in UTC)."""
+
+
+# runtime functions
+def read(path: Union[Path, str]) -> xr.Dataset:
+    """Read an antenna log and create a Dataset object.
+
+    Args:
+        path: Path of the antenna log.
+
+    Returns:
+        A Dataset object that follows ``Antenna``.
+
+    """
+    # read header part
+    with open(path) as f:
+        header = f.readline().split()
+
+    frame, _, ref_longitude, ref_latitude = header
+
+    # read data part
+    date_parser = partial(pd.to_datetime, format=LOG_TIMEFMT)
+
+    data = pd.read_csv(
+        path,
+        date_parser=date_parser,
+        index_col=0,
+        names=LOG_COLUMNS,
+        sep=r"\s+",
+        skiprows=1,
+        usecols=range(len(LOG_COLUMNS)),
+    )
+
+    return Antenna.new(
+        azimuth=data.azimuth,
+        elevation=data.elevation,
+        longitude=data.longitude,
+        latitude=data.latitude,
+        ref_longitude=ref_longitude,
+        ref_latitude=ref_latitude,
+        frame=frame,
+        t=data.index,
+    )
