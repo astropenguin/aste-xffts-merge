@@ -10,7 +10,7 @@ from xarray_dataclasses import Attr, Data, Name
 
 
 # submodules
-from common import DEFAULT_FLOAT, T
+from common import DEFAULT_FLOAT, Time
 
 
 # dataclasses
@@ -18,15 +18,11 @@ from common import DEFAULT_FLOAT, T
 class Azimuth:
     """Representation of azimuth."""
 
-    data: Data[T, float] = DEFAULT_FLOAT
-    name: Name[str] = field(default="Azimuth", init=False)
-    units: Attr[str] = field(default="degree", init=False)
+    data: Data[Time, float] = DEFAULT_FLOAT
 
 
 @dataclass
 class Elevation:
     """Representation of elevation."""
 
-    data: Data[T, float] = DEFAULT_FLOAT
-    name: Name[str] = field(default="Elevation", init=False)
-    units: Attr[str] = field(default="degree", init=False)
+    data: Data[Time, float] = DEFAULT_FLOAT

@@ -19,23 +19,21 @@ DIMS = "t", "ch"
 
 
 # type hints
-T = Literal["t"]
-Ch = Literal["ch"]
-Time = Literal["datetime64[ns]"]
+Time = Literal["t"]
+Chan = Literal["ch"]
+DT64 = Literal["datetime64[ns]"]
 
 
 # dataclasses
 @dataclass
-class TAxis:
+class TimeAxis:
     """Representation of the time axis (in UTC)."""
 
-    data: Data[T, Time] = DEFAULT_TIME
-    name: Name[str] = field(default="Time", init=False)
+    data: Data[Time, DT64] = DEFAULT_TIME
 
 
 @dataclass
-class ChAxis:
+class ChanAxis:
     """Representation of the channel axis."""
 
-    data: Data[Ch, int] = DEFAULT_INT
-    name: Name[str] = field(default="Channel", init=False)
+    data: Data[Chan, int] = DEFAULT_INT
