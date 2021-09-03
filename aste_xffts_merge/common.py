@@ -3,7 +3,7 @@
 
 # standard library
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import Any, Literal, TypeVar
 
 
 # dependencies
@@ -19,17 +19,24 @@ DIMS = "t", "ch"
 
 
 # type hints
+T = TypeVar("T")
 Time = Literal["t"]
 Chan = Literal["ch"]
 DT64 = Literal["datetime64[ns]"]
 
 
 # dataclasses
+def readonly(default: T, **kwargs: Any) -> T:
+    """Create a read-only field for dataclasses."""
+    return field(default=default, init=False, **kwargs)
+
+
 @dataclass
 class TimeAxis:
     """Representation of the time axis (in UTC)."""
 
     data: Data[Time, DT64] = DEFAULT_TIME
+    name: Name[str] = readonly("Time")
 
 
 @dataclass
@@ -37,3 +44,4 @@ class ChanAxis:
     """Representation of the channel axis."""
 
     data: Data[Chan, int] = DEFAULT_INT
+    name: Name[str] = readonly("Channel")
