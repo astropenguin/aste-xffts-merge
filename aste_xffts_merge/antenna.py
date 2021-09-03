@@ -16,7 +16,7 @@ from common import DEFAULT_FLOAT, readonly, Time
 # dataclasses
 @dataclass
 class Azimuth:
-    """Representation of azimuth."""
+    """Representation of antenna azimuth."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
     name: Name[str] = readonly("Azimuth")
@@ -25,8 +25,26 @@ class Azimuth:
 
 @dataclass
 class Elevation:
-    """Representation of elevation."""
+    """Representation of antenna elevation."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
     name: Name[str] = readonly("Elevation")
+    units: Attr[str] = readonly("degree")
+
+
+@dataclass
+class Longitude:
+    """Representation of sky longitude."""
+
+    data: Data[Time, float] = DEFAULT_FLOAT
+    name: Name[str] = readonly("Longitude")
+    units: Attr[str] = readonly("degree")
+
+
+@dataclass
+class Latitude:
+    """Representation of sky latitude."""
+
+    data: Data[Time, float] = DEFAULT_FLOAT
+    name: Name[str] = readonly("Latitude")
     units: Attr[str] = readonly("degree")
