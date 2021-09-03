@@ -12,6 +12,7 @@ from xarray_dataclasses import Attr, Data
 
 # constants
 DEFAULT_FLOAT = 0.0
+DEFAULT_FRAME = "RADEC"
 DEFAULT_INT = 0
 DEFAULT_STR = ""
 DEFAULT_TIME = "2000-01-01"

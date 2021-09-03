@@ -15,7 +15,14 @@ from xarray_dataclasses import AsDataset, Attr, Coordof, Data, Dataof
 
 
 # submodules
-from .common import DEFAULT_FLOAT, DEFAULT_TIME, readonly, Time, TimeAxis
+from .common import (
+    DEFAULT_FLOAT,
+    DEFAULT_FRAME,
+    DEFAULT_TIME,
+    readonly,
+    Time,
+    TimeAxis,
+)
 
 
 # constants
@@ -85,6 +92,15 @@ class RefLatitude:
 
 
 @dataclass
+class Frame:
+    """Representation of sky coordinate frame."""
+
+    data: Data[Tuple[()], str] = DEFAULT_FRAME
+    long_name: Attr[str] = readonly("Sky coordinate frame")
+    standard_name: Attr[str] = readonly("Frame")
+
+
+@dataclass
 class Antenna(AsDataset):
     """Representation of antenna log."""
 
@@ -106,8 +122,8 @@ class Antenna(AsDataset):
     ref_latitude: Dataof[RefLatitude] = DEFAULT_FLOAT
     """Reference sky latitude (in degree)."""
 
-    frame: Data[Tuple[()], str] = "ICRS"
-    """Frame of sky coordinates."""
+    frame: Dataof[Frame] = DEFAULT_FRAME
+    """Sky coordinate frame."""
 
     t: Coordof[TimeAxis] = DEFAULT_TIME
     """Observed time (in UTC)."""
