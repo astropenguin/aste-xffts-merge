@@ -11,12 +11,6 @@ from xarray_dataclasses import Attr, Data
 
 
 # constants
-DEFAULT_FLOAT = 0.0
-DEFAULT_FRAME = "RADEC"
-DEFAULT_INT = 0
-DEFAULT_STR = ""
-DEFAULT_TIME = "2000-01-01"
-DEFAULT_CHAN = 0
 DIMS = "time", "chan"
 
 
@@ -36,7 +30,7 @@ def const(default: T, **kwargs: Any) -> T:
 class Time:
     """Time in UTC."""
 
-    data: Data[time, Literal["M8[ns]"]] = DEFAULT_TIME
+    data: Data[time, Literal["M8[ns]"]]
     long_name: Attr[str] = const("Time in UTC")
     short_name: Attr[str] = const("Time")
 
@@ -45,6 +39,6 @@ class Time:
 class Chan:
     """Channel ID."""
 
-    data: Data[chan, int] = DEFAULT_CHAN
+    data: Data[chan, int]
     long_name: Attr[str] = const("Channel ID")
     short_name: Attr[str] = const("Channel")

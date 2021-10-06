@@ -15,14 +15,7 @@ from xarray_dataclasses import AsDataset, Attr, Coordof, Data, Dataof
 
 
 # submodules
-from .common import (
-    DEFAULT_FLOAT,
-    DEFAULT_FRAME,
-    DEFAULT_TIME,
-    Time,
-    const,
-    time,
-)
+from .common import Time, const, time
 
 
 # constants
@@ -35,7 +28,7 @@ LOG_TIMEFMT = "%y%m%d%H%M%S.%f"
 class Azimuth:
     """Representation of antenna azimuth."""
 
-    data: Data[time, float] = DEFAULT_FLOAT
+    data: Data[time, float]
     long_name: Attr[str] = const("Antenna azimuth")
     short_name: Attr[str] = const("Azimuth")
     units: Attr[str] = const("degree")
@@ -45,7 +38,7 @@ class Azimuth:
 class Elevation:
     """Representation of antenna elevation."""
 
-    data: Data[time, float] = DEFAULT_FLOAT
+    data: Data[time, float]
     long_name: Attr[str] = const("Antenna elevation")
     short_name: Attr[str] = const("Elevation")
     units: Attr[str] = const("degree")
@@ -55,7 +48,7 @@ class Elevation:
 class Longitude:
     """Representation of sky longitude."""
 
-    data: Data[time, float] = DEFAULT_FLOAT
+    data: Data[time, float]
     long_name: Attr[str] = const("Sky longitude")
     short_name: Attr[str] = const("Longitude")
     units: Attr[str] = const("degree")
@@ -65,7 +58,7 @@ class Longitude:
 class Latitude:
     """Representation of sky latitude."""
 
-    data: Data[time, float] = DEFAULT_FLOAT
+    data: Data[time, float]
     long_name: Attr[str] = const("Sky latitude")
     short_name: Attr[str] = const("Latitude")
     units: Attr[str] = const("degree")
@@ -75,7 +68,7 @@ class Latitude:
 class RefLongitude:
     """Representation of reference sky longitude."""
 
-    data: Data[Tuple[()], float] = DEFAULT_FLOAT
+    data: Data[Tuple[()], float]
     long_name: Attr[str] = const("Reference sky longitude")
     short_name: Attr[str] = const("Ref. longitude")
     units: Attr[str] = const("degree")
@@ -85,7 +78,7 @@ class RefLongitude:
 class RefLatitude:
     """Representation of reference sky latitude."""
 
-    data: Data[Tuple[()], float] = DEFAULT_FLOAT
+    data: Data[Tuple[()], float]
     long_name: Attr[str] = const("Reference sky latitude")
     short_name: Attr[str] = const("Ref. latitude")
     units: Attr[str] = const("degree")
@@ -95,7 +88,7 @@ class RefLatitude:
 class Frame:
     """Representation of sky coordinate frame."""
 
-    data: Data[Tuple[()], str] = DEFAULT_FRAME
+    data: Data[Tuple[()], str]
     long_name: Attr[str] = const("Sky coordinate frame")
     short_name: Attr[str] = const("Frame")
 
@@ -104,28 +97,28 @@ class Frame:
 class Antenna(AsDataset):
     """Representation of antenna log."""
 
-    azimuth: Dataof[Azimuth] = DEFAULT_FLOAT
+    azimuth: Dataof[Azimuth] = 0.0
     """Antenna azimuth (in degree)."""
 
-    elevation: Dataof[Elevation] = DEFAULT_FLOAT
+    elevation: Dataof[Elevation] = 0.0
     """Antenna elevation (in degree)."""
 
-    longitude: Dataof[Longitude] = DEFAULT_FLOAT
+    longitude: Dataof[Longitude] = 0.0
     """Sky latitude (in degree)."""
 
-    latitude: Dataof[Latitude] = DEFAULT_FLOAT
+    latitude: Dataof[Latitude] = 0.0
     """Sky latitude (in degree)."""
 
-    ref_longitude: Dataof[RefLongitude] = DEFAULT_FLOAT
+    ref_longitude: Dataof[RefLongitude] = 0.0
     """Reference sky longitude (in degree)."""
 
-    ref_latitude: Dataof[RefLatitude] = DEFAULT_FLOAT
+    ref_latitude: Dataof[RefLatitude] = 0.0
     """Reference sky latitude (in degree)."""
 
-    frame: Dataof[Frame] = DEFAULT_FRAME
+    frame: Dataof[Frame] = "RADEC"
     """Sky coordinate frame."""
 
-    time: Coordof[Time] = DEFAULT_TIME
+    time: Coordof[Time] = "2000-01-01"
     """Observed time (in UTC)."""
 
 
