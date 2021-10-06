@@ -38,7 +38,7 @@ class TimeAxis:
 
     data: Data[Time, DT64] = DEFAULT_TIME
     long_name: Attr[str] = const("Observed time")
-    standard_name: Attr[str] = const("Time")
+    short_name: Attr[str] = const("Time")
 
 
 @dataclass
@@ -47,4 +47,4 @@ class ChanAxis:
 
     data: Data[Chan, int] = DEFAULT_INT
     long_name: Attr[str] = const("Channel ID")
-    standard_name: Attr[str] = const("Channel")
+    short_name: Attr[str] = const("Channel")

@@ -18,11 +18,11 @@ def test_time_axis() -> None:
     assert t.dims == ("t",)
     assert t.dtype == np.dtype("datetime64[ns]")
     assert t.long_name == "Observed time"
-    assert t.standard_name == "Time"
+    assert t.short_name == "Time"
 
 
 def test_chan_axis() -> None:
     assert ch.dims == ("ch",)
     assert ch.dtype == np.dtype("int64")
     assert ch.long_name == "Channel ID"
-    assert ch.standard_name == "Channel"
+    assert ch.short_name == "Channel"

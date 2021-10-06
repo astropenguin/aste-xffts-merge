@@ -37,7 +37,7 @@ class Azimuth:
 
     data: Data[Time, float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Antenna azimuth")
-    standard_name: Attr[str] = const("Azimuth")
+    short_name: Attr[str] = const("Azimuth")
     units: Attr[str] = const("degree")
 
 
@@ -47,7 +47,7 @@ class Elevation:
 
     data: Data[Time, float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Antenna elevation")
-    standard_name: Attr[str] = const("Elevation")
+    short_name: Attr[str] = const("Elevation")
     units: Attr[str] = const("degree")
 
 
@@ -57,7 +57,7 @@ class Longitude:
 
     data: Data[Time, float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Sky longitude")
-    standard_name: Attr[str] = const("Longitude")
+    short_name: Attr[str] = const("Longitude")
     units: Attr[str] = const("degree")
 
 
@@ -67,7 +67,7 @@ class Latitude:
 
     data: Data[Time, float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Sky latitude")
-    standard_name: Attr[str] = const("Latitude")
+    short_name: Attr[str] = const("Latitude")
     units: Attr[str] = const("degree")
 
 
@@ -77,7 +77,7 @@ class RefLongitude:
 
     data: Data[Tuple[()], float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Reference sky longitude")
-    standard_name: Attr[str] = const("Ref. longitude")
+    short_name: Attr[str] = const("Ref. longitude")
     units: Attr[str] = const("degree")
 
 
@@ -87,7 +87,7 @@ class RefLatitude:
 
     data: Data[Tuple[()], float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Reference sky latitude")
-    standard_name: Attr[str] = const("Ref. latitude")
+    short_name: Attr[str] = const("Ref. latitude")
     units: Attr[str] = const("degree")
 
 
@@ -97,7 +97,7 @@ class Frame:
 
     data: Data[Tuple[()], str] = DEFAULT_FRAME
     long_name: Attr[str] = const("Sky coordinate frame")
-    standard_name: Attr[str] = const("Frame")
+    short_name: Attr[str] = const("Frame")
 
 
 @dataclass

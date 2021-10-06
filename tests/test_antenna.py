@@ -33,7 +33,7 @@ def test_azimuth() -> None:
     assert azimuth.dims == ("t",)
     assert azimuth.dtype == float
     assert azimuth.long_name == "Antenna azimuth"
-    assert azimuth.standard_name == "Azimuth"
+    assert azimuth.short_name == "Azimuth"
     assert azimuth.units == "degree"
 
 
@@ -43,7 +43,7 @@ def test_elevation() -> None:
     assert elevation.dims == ("t",)
     assert elevation.dtype == float
     assert elevation.long_name == "Antenna elevation"
-    assert elevation.standard_name == "Elevation"
+    assert elevation.short_name == "Elevation"
     assert elevation.units == "degree"
 
 
@@ -53,7 +53,7 @@ def test_longitude() -> None:
     assert longitude.dims == ("t",)
     assert longitude.dtype == float
     assert longitude.long_name == "Sky longitude"
-    assert longitude.standard_name == "Longitude"
+    assert longitude.short_name == "Longitude"
     assert longitude.units == "degree"
 
 
@@ -63,7 +63,7 @@ def test_latitude() -> None:
     assert latitude.dims == ("t",)
     assert latitude.dtype == float
     assert latitude.long_name == "Sky latitude"
-    assert latitude.standard_name == "Latitude"
+    assert latitude.short_name == "Latitude"
     assert latitude.units == "degree"
 
 
@@ -72,7 +72,7 @@ def test_ref_longitude() -> None:
     assert ref_longitude.dims == ()
     assert ref_longitude.dtype == float
     assert ref_longitude.long_name == "Reference sky longitude"
-    assert ref_longitude.standard_name == "Ref. longitude"
+    assert ref_longitude.short_name == "Ref. longitude"
     assert ref_longitude.units == "degree"
 
 
@@ -81,7 +81,7 @@ def test_ref_latitude() -> None:
     assert ref_latitude.dims == ()
     assert ref_latitude.dtype == float
     assert ref_latitude.long_name == "Reference sky latitude"
-    assert ref_latitude.standard_name == "Ref. latitude"
+    assert ref_latitude.short_name == "Ref. latitude"
     assert ref_latitude.units == "degree"
 
 
@@ -90,7 +90,7 @@ def test_frame() -> None:
     assert frame.dims == ()
     assert frame.dtype.type == np.str_
     assert frame.long_name == "Sky coordinate frame"
-    assert frame.standard_name == "Frame"
+    assert frame.short_name == "Frame"
 
 
 def test_t() -> None:
@@ -99,4 +99,4 @@ def test_t() -> None:
     assert t.dims == ("t",)
     assert t.dtype.type == np.datetime64
     assert t.long_name == "Observed time"
-    assert t.standard_name == "Time"
+    assert t.short_name == "Time"
