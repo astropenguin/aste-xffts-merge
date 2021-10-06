@@ -19,6 +19,9 @@ from .common import Time, const, time
 
 
 # constants
+ASTE_ALT = "4861.9m"
+ASTE_LAT = "-22d58m17.69447s"
+ASTE_LON = "-67d42m11.89525s"
 LOG_COLUMNS = "time", "longitude", "latitude", "azimuth", "elevation"
 LOG_TIMEFMT = "%y%m%d%H%M%S.%f"
 
