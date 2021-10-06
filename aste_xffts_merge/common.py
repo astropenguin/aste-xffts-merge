@@ -1,4 +1,4 @@
-"""Submodule that defines objects commonly used within the package."""
+"""Submodule of common objects within the package."""
 
 
 # standard library
@@ -11,40 +11,34 @@ from xarray_dataclasses import Attr, Data
 
 
 # constants
-DEFAULT_FLOAT = 0.0
-DEFAULT_FRAME = "RADEC"
-DEFAULT_INT = 0
-DEFAULT_STR = ""
-DEFAULT_TIME = "2000-01-01"
-DIMS = "t", "ch"
+DIMS = "time", "chan"
 
 
 # type hints
 T = TypeVar("T")
-Time = Literal["t"]
-Chan = Literal["ch"]
-DT64 = Literal["datetime64[ns]"]
+time = Literal["time"]
+chan = Literal["chan"]
 
 
 # dataclasses
-def readonly(default: T, **kwargs: Any) -> T:
-    """Create a read-only field for dataclasses."""
+def const(default: T, **kwargs: Any) -> T:
+    """Create a constant field for dataclasses."""
     return field(default=default, init=False, **kwargs)
 
 
 @dataclass
-class TimeAxis:
-    """Representation of the time axis (in UTC)."""
+class Time:
+    """Time in UTC."""
 
-    data: Data[Time, DT64] = DEFAULT_TIME
-    long_name: Attr[str] = readonly("Observed time")
-    standard_name: Attr[str] = readonly("Time")
+    data: Data[time, Literal["M8[ns]"]]
+    long_name: Attr[str] = const("Time in UTC")
+    short_name: Attr[str] = const("Time")
 
 
 @dataclass
-class ChanAxis:
-    """Representation of the channel axis."""
+class Chan:
+    """Channel ID."""
 
-    data: Data[Chan, int] = DEFAULT_INT
-    long_name: Attr[str] = readonly("Channel ID")
-    standard_name: Attr[str] = readonly("Channel")
+    data: Data[chan, int]
+    long_name: Attr[str] = const("Channel ID")
+    short_name: Attr[str] = const("Channel")

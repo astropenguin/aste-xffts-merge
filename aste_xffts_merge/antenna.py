@@ -1,4 +1,4 @@
-"""Submodule for the data structure and the reader of antenna logs."""
+"""Submodule of ASTE antenna logs."""
 
 
 # standard library
@@ -15,14 +15,7 @@ from xarray_dataclasses import AsDataset, Attr, Coordof, Data, Dataof
 
 
 # submodules
-from .common import (
-    DEFAULT_FLOAT,
-    DEFAULT_FRAME,
-    DEFAULT_TIME,
-    readonly,
-    Time,
-    TimeAxis,
-)
+from .common import Time, const, time
 
 
 # constants
@@ -33,100 +26,100 @@ LOG_TIMEFMT = "%y%m%d%H%M%S.%f"
 # dataclasses
 @dataclass
 class Azimuth:
-    """Representation of antenna azimuth."""
+    """Antenna azimuth (degree)."""
 
-    data: Data[Time, float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Antenna azimuth")
-    standard_name: Attr[str] = readonly("Azimuth")
-    units: Attr[str] = readonly("degree")
+    data: Data[time, float]
+    long_name: Attr[str] = const("Antenna azimuth")
+    short_name: Attr[str] = const("Azimuth")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
 class Elevation:
-    """Representation of antenna elevation."""
+    """Antenna elevation (degree)."""
 
-    data: Data[Time, float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Antenna elevation")
-    standard_name: Attr[str] = readonly("Elevation")
-    units: Attr[str] = readonly("degree")
+    data: Data[time, float]
+    long_name: Attr[str] = const("Antenna elevation")
+    short_name: Attr[str] = const("Elevation")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
 class Longitude:
-    """Representation of sky longitude."""
+    """Sky longitude (degree)."""
 
-    data: Data[Time, float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Sky longitude")
-    standard_name: Attr[str] = readonly("Longitude")
-    units: Attr[str] = readonly("degree")
+    data: Data[time, float]
+    long_name: Attr[str] = const("Sky longitude")
+    short_name: Attr[str] = const("Longitude")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
 class Latitude:
-    """Representation of sky latitude."""
+    """Sky latitude (degree)."""
 
-    data: Data[Time, float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Sky latitude")
-    standard_name: Attr[str] = readonly("Latitude")
-    units: Attr[str] = readonly("degree")
+    data: Data[time, float]
+    long_name: Attr[str] = const("Sky latitude")
+    short_name: Attr[str] = const("Latitude")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
 class RefLongitude:
-    """Representation of reference sky longitude."""
+    """Reference sky longitude (degree)."""
 
-    data: Data[Tuple[()], float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Reference sky longitude")
-    standard_name: Attr[str] = readonly("Ref. longitude")
-    units: Attr[str] = readonly("degree")
+    data: Data[Tuple[()], float]
+    long_name: Attr[str] = const("Reference sky longitude")
+    short_name: Attr[str] = const("Ref. longitude")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
 class RefLatitude:
-    """Representation of reference sky latitude."""
+    """Reference sky latitude (degree)."""
 
-    data: Data[Tuple[()], float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Reference sky latitude")
-    standard_name: Attr[str] = readonly("Ref. latitude")
-    units: Attr[str] = readonly("degree")
+    data: Data[Tuple[()], float]
+    long_name: Attr[str] = const("Reference sky latitude")
+    short_name: Attr[str] = const("Ref. latitude")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
 class Frame:
-    """Representation of sky coordinate frame."""
+    """Sky coordinate frame."""
 
-    data: Data[Tuple[()], str] = DEFAULT_FRAME
-    long_name: Attr[str] = readonly("Sky coordinate frame")
-    standard_name: Attr[str] = readonly("Frame")
+    data: Data[Tuple[()], str]
+    long_name: Attr[str] = const("Sky coordinate frame")
+    short_name: Attr[str] = const("Frame")
 
 
 @dataclass
 class Antenna(AsDataset):
-    """Representation of antenna log."""
+    """ASTE antenna log."""
 
-    azimuth: Dataof[Azimuth] = DEFAULT_FLOAT
-    """Antenna azimuth (in degree)."""
+    azimuth: Dataof[Azimuth] = 0.0
+    """Antenna azimuth (degree)."""
 
-    elevation: Dataof[Elevation] = DEFAULT_FLOAT
-    """Antenna elevation (in degree)."""
+    elevation: Dataof[Elevation] = 0.0
+    """Antenna elevation (degree)."""
 
-    longitude: Dataof[Longitude] = DEFAULT_FLOAT
-    """Sky latitude (in degree)."""
+    longitude: Dataof[Longitude] = 0.0
+    """Sky latitude (degree)."""
 
-    latitude: Dataof[Latitude] = DEFAULT_FLOAT
-    """Sky latitude (in degree)."""
+    latitude: Dataof[Latitude] = 0.0
+    """Sky latitude (degree)."""
 
-    ref_longitude: Dataof[RefLongitude] = DEFAULT_FLOAT
-    """Reference sky longitude (in degree)."""
+    ref_longitude: Dataof[RefLongitude] = 0.0
+    """Reference sky longitude (degree)."""
 
-    ref_latitude: Dataof[RefLatitude] = DEFAULT_FLOAT
-    """Reference sky latitude (in degree)."""
+    ref_latitude: Dataof[RefLatitude] = 0.0
+    """Reference sky latitude (degree)."""
 
-    frame: Dataof[Frame] = DEFAULT_FRAME
+    frame: Dataof[Frame] = "RADEC"
     """Sky coordinate frame."""
 
-    t: Coordof[TimeAxis] = DEFAULT_TIME
-    """Observed time (in UTC)."""
+    time: Coordof[Time] = "2000-01-01"
+    """Time in UTC."""
 
 
 # runtime functions
@@ -167,5 +160,5 @@ def read(path: Union[Path, str]) -> xr.Dataset:
         ref_longitude=ref_longitude,
         ref_latitude=ref_latitude,
         frame=frame,
-        t=data.index,
+        time=data.index,
     )
