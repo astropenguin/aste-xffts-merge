@@ -1,4 +1,4 @@
-"""Submodule that defines objects commonly used within the package."""
+"""Submodule of common objects within the package."""
 
 
 # standard library

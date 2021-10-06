@@ -1,4 +1,4 @@
-"""Submodule for the data structure and the reader of antenna logs."""
+"""Submodule of ASTE antenna logs."""
 
 
 # standard library
@@ -26,7 +26,7 @@ LOG_TIMEFMT = "%y%m%d%H%M%S.%f"
 # dataclasses
 @dataclass
 class Azimuth:
-    """Representation of antenna azimuth."""
+    """Antenna azimuth (degree)."""
 
     data: Data[time, float]
     long_name: Attr[str] = const("Antenna azimuth")
@@ -36,7 +36,7 @@ class Azimuth:
 
 @dataclass
 class Elevation:
-    """Representation of antenna elevation."""
+    """Antenna elevation (degree)."""
 
     data: Data[time, float]
     long_name: Attr[str] = const("Antenna elevation")
@@ -46,7 +46,7 @@ class Elevation:
 
 @dataclass
 class Longitude:
-    """Representation of sky longitude."""
+    """Sky longitude (degree)."""
 
     data: Data[time, float]
     long_name: Attr[str] = const("Sky longitude")
@@ -56,7 +56,7 @@ class Longitude:
 
 @dataclass
 class Latitude:
-    """Representation of sky latitude."""
+    """Sky latitude (degree)."""
 
     data: Data[time, float]
     long_name: Attr[str] = const("Sky latitude")
@@ -66,7 +66,7 @@ class Latitude:
 
 @dataclass
 class RefLongitude:
-    """Representation of reference sky longitude."""
+    """Reference sky longitude (degree)."""
 
     data: Data[Tuple[()], float]
     long_name: Attr[str] = const("Reference sky longitude")
@@ -76,7 +76,7 @@ class RefLongitude:
 
 @dataclass
 class RefLatitude:
-    """Representation of reference sky latitude."""
+    """Reference sky latitude (degree)."""
 
     data: Data[Tuple[()], float]
     long_name: Attr[str] = const("Reference sky latitude")
@@ -86,7 +86,7 @@ class RefLatitude:
 
 @dataclass
 class Frame:
-    """Representation of sky coordinate frame."""
+    """Sky coordinate frame."""
 
     data: Data[Tuple[()], str]
     long_name: Attr[str] = const("Sky coordinate frame")
@@ -95,31 +95,31 @@ class Frame:
 
 @dataclass
 class Antenna(AsDataset):
-    """Representation of antenna log."""
+    """ASTE antenna log."""
 
     azimuth: Dataof[Azimuth] = 0.0
-    """Antenna azimuth (in degree)."""
+    """Antenna azimuth (degree)."""
 
     elevation: Dataof[Elevation] = 0.0
-    """Antenna elevation (in degree)."""
+    """Antenna elevation (degree)."""
 
     longitude: Dataof[Longitude] = 0.0
-    """Sky latitude (in degree)."""
+    """Sky latitude (degree)."""
 
     latitude: Dataof[Latitude] = 0.0
-    """Sky latitude (in degree)."""
+    """Sky latitude (degree)."""
 
     ref_longitude: Dataof[RefLongitude] = 0.0
-    """Reference sky longitude (in degree)."""
+    """Reference sky longitude (degree)."""
 
     ref_latitude: Dataof[RefLatitude] = 0.0
-    """Reference sky latitude (in degree)."""
+    """Reference sky latitude (degree)."""
 
     frame: Dataof[Frame] = "RADEC"
     """Sky coordinate frame."""
 
     time: Coordof[Time] = "2000-01-01"
-    """Observed time (in UTC)."""
+    """Time in UTC."""
 
 
 # runtime functions
