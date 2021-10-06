@@ -19,9 +19,9 @@ from .common import (
     DEFAULT_FLOAT,
     DEFAULT_FRAME,
     DEFAULT_TIME,
-    readonly,
     Time,
     TimeAxis,
+    const,
 )
 
 
@@ -36,9 +36,9 @@ class Azimuth:
     """Representation of antenna azimuth."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Antenna azimuth")
-    standard_name: Attr[str] = readonly("Azimuth")
-    units: Attr[str] = readonly("degree")
+    long_name: Attr[str] = const("Antenna azimuth")
+    standard_name: Attr[str] = const("Azimuth")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
@@ -46,9 +46,9 @@ class Elevation:
     """Representation of antenna elevation."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Antenna elevation")
-    standard_name: Attr[str] = readonly("Elevation")
-    units: Attr[str] = readonly("degree")
+    long_name: Attr[str] = const("Antenna elevation")
+    standard_name: Attr[str] = const("Elevation")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
@@ -56,9 +56,9 @@ class Longitude:
     """Representation of sky longitude."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Sky longitude")
-    standard_name: Attr[str] = readonly("Longitude")
-    units: Attr[str] = readonly("degree")
+    long_name: Attr[str] = const("Sky longitude")
+    standard_name: Attr[str] = const("Longitude")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
@@ -66,9 +66,9 @@ class Latitude:
     """Representation of sky latitude."""
 
     data: Data[Time, float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Sky latitude")
-    standard_name: Attr[str] = readonly("Latitude")
-    units: Attr[str] = readonly("degree")
+    long_name: Attr[str] = const("Sky latitude")
+    standard_name: Attr[str] = const("Latitude")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
@@ -76,9 +76,9 @@ class RefLongitude:
     """Representation of reference sky longitude."""
 
     data: Data[Tuple[()], float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Reference sky longitude")
-    standard_name: Attr[str] = readonly("Ref. longitude")
-    units: Attr[str] = readonly("degree")
+    long_name: Attr[str] = const("Reference sky longitude")
+    standard_name: Attr[str] = const("Ref. longitude")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
@@ -86,9 +86,9 @@ class RefLatitude:
     """Representation of reference sky latitude."""
 
     data: Data[Tuple[()], float] = DEFAULT_FLOAT
-    long_name: Attr[str] = readonly("Reference sky latitude")
-    standard_name: Attr[str] = readonly("Ref. latitude")
-    units: Attr[str] = readonly("degree")
+    long_name: Attr[str] = const("Reference sky latitude")
+    standard_name: Attr[str] = const("Ref. latitude")
+    units: Attr[str] = const("degree")
 
 
 @dataclass
@@ -96,8 +96,8 @@ class Frame:
     """Representation of sky coordinate frame."""
 
     data: Data[Tuple[()], str] = DEFAULT_FRAME
-    long_name: Attr[str] = readonly("Sky coordinate frame")
-    standard_name: Attr[str] = readonly("Frame")
+    long_name: Attr[str] = const("Sky coordinate frame")
+    standard_name: Attr[str] = const("Frame")
 
 
 @dataclass

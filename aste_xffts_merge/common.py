@@ -27,8 +27,8 @@ DT64 = Literal["datetime64[ns]"]
 
 
 # dataclasses
-def readonly(default: T, **kwargs: Any) -> T:
-    """Create a read-only field for dataclasses."""
+def const(default: T, **kwargs: Any) -> T:
+    """Create a constant field for dataclasses."""
     return field(default=default, init=False, **kwargs)
 
 
@@ -37,8 +37,8 @@ class TimeAxis:
     """Representation of the time axis (in UTC)."""
 
     data: Data[Time, DT64] = DEFAULT_TIME
-    long_name: Attr[str] = readonly("Observed time")
-    standard_name: Attr[str] = readonly("Time")
+    long_name: Attr[str] = const("Observed time")
+    standard_name: Attr[str] = const("Time")
 
 
 @dataclass
@@ -46,5 +46,5 @@ class ChanAxis:
     """Representation of the channel axis."""
 
     data: Data[Chan, int] = DEFAULT_INT
-    long_name: Attr[str] = readonly("Channel ID")
-    standard_name: Attr[str] = readonly("Channel")
+    long_name: Attr[str] = const("Channel ID")
+    standard_name: Attr[str] = const("Channel")
