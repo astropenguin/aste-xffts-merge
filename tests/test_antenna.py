@@ -98,5 +98,5 @@ def test_t() -> None:
     assert time.data[-1] == np.datetime64("2016-09-25T05:53:50.500000000")
     assert time.dims == ("time",)
     assert time.dtype.type == np.datetime64
-    assert time.long_name == "Observed time"
+    assert time.long_name == "Time in UTC"
     assert time.short_name == "Time"

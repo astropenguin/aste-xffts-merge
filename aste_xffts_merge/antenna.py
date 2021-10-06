@@ -20,8 +20,8 @@ from .common import (
     DEFAULT_FRAME,
     DEFAULT_TIME,
     Time,
-    TimeAxis,
     const,
+    time,
 )
 
 
@@ -35,7 +35,7 @@ LOG_TIMEFMT = "%y%m%d%H%M%S.%f"
 class Azimuth:
     """Representation of antenna azimuth."""
 
-    data: Data[Time, float] = DEFAULT_FLOAT
+    data: Data[time, float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Antenna azimuth")
     short_name: Attr[str] = const("Azimuth")
     units: Attr[str] = const("degree")
@@ -45,7 +45,7 @@ class Azimuth:
 class Elevation:
     """Representation of antenna elevation."""
 
-    data: Data[Time, float] = DEFAULT_FLOAT
+    data: Data[time, float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Antenna elevation")
     short_name: Attr[str] = const("Elevation")
     units: Attr[str] = const("degree")
@@ -55,7 +55,7 @@ class Elevation:
 class Longitude:
     """Representation of sky longitude."""
 
-    data: Data[Time, float] = DEFAULT_FLOAT
+    data: Data[time, float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Sky longitude")
     short_name: Attr[str] = const("Longitude")
     units: Attr[str] = const("degree")
@@ -65,7 +65,7 @@ class Longitude:
 class Latitude:
     """Representation of sky latitude."""
 
-    data: Data[Time, float] = DEFAULT_FLOAT
+    data: Data[time, float] = DEFAULT_FLOAT
     long_name: Attr[str] = const("Sky latitude")
     short_name: Attr[str] = const("Latitude")
     units: Attr[str] = const("degree")
@@ -125,7 +125,7 @@ class Antenna(AsDataset):
     frame: Dataof[Frame] = DEFAULT_FRAME
     """Sky coordinate frame."""
 
-    time: Coordof[TimeAxis] = DEFAULT_TIME
+    time: Coordof[Time] = DEFAULT_TIME
     """Observed time (in UTC)."""
 
 

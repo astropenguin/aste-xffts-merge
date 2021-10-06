@@ -16,14 +16,14 @@ DEFAULT_FRAME = "RADEC"
 DEFAULT_INT = 0
 DEFAULT_STR = ""
 DEFAULT_TIME = "2000-01-01"
+DEFAULT_CHAN = 0
 DIMS = "time", "chan"
 
 
 # type hints
 T = TypeVar("T")
-Time = Literal["time"]
-Chan = Literal["chan"]
-DT64 = Literal["datetime64[ns]"]
+time = Literal["time"]
+chan = Literal["chan"]
 
 
 # dataclasses
@@ -33,18 +33,18 @@ def const(default: T, **kwargs: Any) -> T:
 
 
 @dataclass
-class TimeAxis:
-    """Representation of the time axis (in UTC)."""
+class Time:
+    """Time in UTC."""
 
-    data: Data[Time, DT64] = DEFAULT_TIME
-    long_name: Attr[str] = const("Observed time")
+    data: Data[time, Literal["M8[ns]"]] = DEFAULT_TIME
+    long_name: Attr[str] = const("Time in UTC")
     short_name: Attr[str] = const("Time")
 
 
 @dataclass
-class ChanAxis:
-    """Representation of the channel axis."""
+class Chan:
+    """Channel ID."""
 
-    data: Data[Chan, int] = DEFAULT_INT
+    data: Data[chan, int] = DEFAULT_CHAN
     long_name: Attr[str] = const("Channel ID")
     short_name: Attr[str] = const("Channel")
