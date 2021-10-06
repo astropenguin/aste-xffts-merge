@@ -23,14 +23,14 @@ latitude = antenna.latitude
 ref_longitude = antenna.ref_longitude
 ref_latitude = antenna.ref_latitude
 frame = antenna.frame
-t = antenna.t
+time = antenna.time
 
 
 # test functions
 def test_azimuth() -> None:
     assert azimuth.data[0] == 31.65207
     assert azimuth.data[-1] == 27.23589
-    assert azimuth.dims == ("t",)
+    assert azimuth.dims == ("time",)
     assert azimuth.dtype == float
     assert azimuth.long_name == "Antenna azimuth"
     assert azimuth.short_name == "Azimuth"
@@ -40,7 +40,7 @@ def test_azimuth() -> None:
 def test_elevation() -> None:
     assert elevation.data[0] == 66.85711
     assert elevation.data[-1] == 67.71096
-    assert elevation.dims == ("t",)
+    assert elevation.dims == ("time",)
     assert elevation.dtype == float
     assert elevation.long_name == "Antenna elevation"
     assert elevation.short_name == "Elevation"
@@ -50,7 +50,7 @@ def test_elevation() -> None:
 def test_longitude() -> None:
     assert longitude.data[0] == 34.92007
     assert longitude.data[-1] == 34.92007
-    assert longitude.dims == ("t",)
+    assert longitude.dims == ("time",)
     assert longitude.dtype == float
     assert longitude.long_name == "Sky longitude"
     assert longitude.short_name == "Longitude"
@@ -60,7 +60,7 @@ def test_longitude() -> None:
 def test_latitude() -> None:
     assert latitude.data[0] == -2.97831
     assert latitude.data[-1] == -2.97831
-    assert latitude.dims == ("t",)
+    assert latitude.dims == ("time",)
     assert latitude.dtype == float
     assert latitude.long_name == "Sky latitude"
     assert latitude.short_name == "Latitude"
@@ -94,9 +94,9 @@ def test_frame() -> None:
 
 
 def test_t() -> None:
-    assert t.data[0] == np.datetime64("2016-09-25T05:46:14.600000000")
-    assert t.data[-1] == np.datetime64("2016-09-25T05:53:50.500000000")
-    assert t.dims == ("t",)
-    assert t.dtype.type == np.datetime64
-    assert t.long_name == "Observed time"
-    assert t.short_name == "Time"
+    assert time.data[0] == np.datetime64("2016-09-25T05:46:14.600000000")
+    assert time.data[-1] == np.datetime64("2016-09-25T05:53:50.500000000")
+    assert time.dims == ("time",)
+    assert time.dtype.type == np.datetime64
+    assert time.long_name == "Observed time"
+    assert time.short_name == "Time"

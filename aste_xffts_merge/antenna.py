@@ -125,7 +125,7 @@ class Antenna(AsDataset):
     frame: Dataof[Frame] = DEFAULT_FRAME
     """Sky coordinate frame."""
 
-    t: Coordof[TimeAxis] = DEFAULT_TIME
+    time: Coordof[TimeAxis] = DEFAULT_TIME
     """Observed time (in UTC)."""
 
 
@@ -167,5 +167,5 @@ def read(path: Union[Path, str]) -> xr.Dataset:
         ref_longitude=ref_longitude,
         ref_latitude=ref_latitude,
         frame=frame,
-        t=data.index,
+        time=data.index,
     )

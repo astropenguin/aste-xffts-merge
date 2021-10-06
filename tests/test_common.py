@@ -9,20 +9,20 @@ from aste_xffts_merge.common import TimeAxis, ChanAxis
 
 
 # test data
-t = asdataarray(TimeAxis(pd.date_range("2000-01-01", periods=5)))
-ch = asdataarray(ChanAxis(np.arange(5)))
+time = asdataarray(TimeAxis(pd.date_range("2000-01-01", periods=5)))
+chan = asdataarray(ChanAxis(np.arange(5)))
 
 
 # test functions
 def test_time_axis() -> None:
-    assert t.dims == ("t",)
-    assert t.dtype == np.dtype("datetime64[ns]")
-    assert t.long_name == "Observed time"
-    assert t.short_name == "Time"
+    assert time.dims == ("time",)
+    assert time.dtype == np.dtype("datetime64[ns]")
+    assert time.long_name == "Observed time"
+    assert time.short_name == "Time"
 
 
 def test_chan_axis() -> None:
-    assert ch.dims == ("ch",)
-    assert ch.dtype == np.dtype("int64")
-    assert ch.long_name == "Channel ID"
-    assert ch.short_name == "Channel"
+    assert chan.dims == ("chan",)
+    assert chan.dtype == np.dtype("int64")
+    assert chan.long_name == "Channel ID"
+    assert chan.short_name == "Channel"

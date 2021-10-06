@@ -16,13 +16,13 @@ DEFAULT_FRAME = "RADEC"
 DEFAULT_INT = 0
 DEFAULT_STR = ""
 DEFAULT_TIME = "2000-01-01"
-DIMS = "t", "ch"
+DIMS = "time", "chan"
 
 
 # type hints
 T = TypeVar("T")
-Time = Literal["t"]
-Chan = Literal["ch"]
+Time = Literal["time"]
+Chan = Literal["chan"]
 DT64 = Literal["datetime64[ns]"]
 
 
