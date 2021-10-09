@@ -11,6 +11,8 @@ from typing import Tuple, Union
 # dependencies
 import pandas as pd
 import xarray as xr
+import astropy.units as u
+from astropy.coordinates import AltAz, EarthLocation, FK5, SkyCoord
 from xarray_dataclasses import AsDataset, Attr, Coordof, Data, Dataof
 
 
@@ -19,10 +21,24 @@ from .common import Time, const, time
 
 
 # constants
-ASTE_ALT = "4861.9m"
-ASTE_LAT = "-22d58m17.69447s"
-ASTE_LON = "-67d42m11.89525s"
-LOG_COLUMNS = "time", "longitude", "latitude", "azimuth", "elevation"
+ASTE_SITE = EarthLocation.from_geodetic(
+    lon="-67d42m11.89525s",
+    lat="-22d58m17.69447s",
+    height="4861.9m",
+)
+LOG_COLUMNS = (
+    "time",
+    "ra_prog",
+    "dec_prog",
+    "az_prog",
+    "el_prog",
+    "az_real",
+    "el_real",
+    "az_error",
+    "el_error",
+)
+LOG_FRAME = "RADEC"
+LOG_SEPARATOR = r"\s+"
 LOG_TIMEFMT = "%y%m%d%H%M%S.%f"
 
 
@@ -110,32 +126,52 @@ def read(path: Union[Path, str]) -> xr.Dataset:
         A Dataset object that follows ``Antenna``.
 
     """
-    # read header part
+    # check if the sky coordinate frame is supported
     with open(path) as f:
-        header = f.readline().split()
+        frame = f.readline().split()[0]
 
-    frame, _, ref_longitude, ref_latitude = header
+    if not frame == LOG_FRAME:
+        raise ValueError(f"RADEC is only supported. Got {frame}.")
 
-    # read data part
+    # read the antenna log
     date_parser = partial(pd.to_datetime, format=LOG_TIMEFMT)
 
-    data = pd.read_csv(
+    log = pd.read_csv(
         path,
         date_parser=date_parser,
         index_col=0,
         names=LOG_COLUMNS,
-        sep=r"\s+",
+        sep=LOG_SEPARATOR,
         skiprows=1,
-        usecols=range(len(LOG_COLUMNS)),
     )
 
+    # calculate real-prog differences in sky
+    sky_prog = SkyCoord(
+        alt=log[LOG_COLUMNS[4]],
+        az=log[LOG_COLUMNS[3]],
+        frame=AltAz,
+        location=ASTE_SITE,
+        obstime=log.index,
+        unit=u.deg,  # type: ignore
+    ).transform_to(FK5)
+
+    sky_real = SkyCoord(
+        alt=log[LOG_COLUMNS[6]],
+        az=log[LOG_COLUMNS[5]],
+        frame=AltAz,
+        location=ASTE_SITE,
+        obstime=log.index,
+        unit=u.deg,  # type: ignore
+    ).transform_to(FK5)
+
+    d_lon = (sky_real.ra - sky_prog.ra).deg  # type: ignore
+    d_lat = (sky_real.dec - sky_prog.dec).deg  # type: ignore
+
     return Antenna.new(
-        azimuth=data.azimuth,
-        elevation=data.elevation,
-        longitude=data.longitude,
-        latitude=data.latitude,
-        ref_longitude=ref_longitude,
-        ref_latitude=ref_latitude,
-        frame=frame,
-        time=data.index,
+        time=log.index,
+        azimuth=log[LOG_COLUMNS[5]],
+        elevation=log[LOG_COLUMNS[6]],
+        longitude=log[LOG_COLUMNS[1]] + d_lon,
+        latitude=log[LOG_COLUMNS[2]] + d_lat,
+        frame=FK5.name,  # type: ignore
     )
