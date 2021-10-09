@@ -68,26 +68,6 @@ class Latitude:
 
 
 @dataclass
-class RefLongitude:
-    """Reference sky longitude (degree)."""
-
-    data: Data[Tuple[()], float]
-    long_name: Attr[str] = const("Reference sky longitude")
-    short_name: Attr[str] = const("Ref. longitude")
-    units: Attr[str] = const("degree")
-
-
-@dataclass
-class RefLatitude:
-    """Reference sky latitude (degree)."""
-
-    data: Data[Tuple[()], float]
-    long_name: Attr[str] = const("Reference sky latitude")
-    short_name: Attr[str] = const("Ref. latitude")
-    units: Attr[str] = const("degree")
-
-
-@dataclass
 class Frame:
     """Sky coordinate frame."""
 
@@ -100,29 +80,23 @@ class Frame:
 class Antenna(AsDataset):
     """ASTE antenna log."""
 
-    azimuth: Dataof[Azimuth] = 0.0
+    time: Coordof[Time]
+    """Time in UTC."""
+
+    azimuth: Dataof[Azimuth]
     """Antenna azimuth (degree)."""
 
-    elevation: Dataof[Elevation] = 0.0
+    elevation: Dataof[Elevation]
     """Antenna elevation (degree)."""
 
-    longitude: Dataof[Longitude] = 0.0
+    longitude: Dataof[Longitude]
+    """Sky longitude (degree)."""
+
+    latitude: Dataof[Latitude]
     """Sky latitude (degree)."""
 
-    latitude: Dataof[Latitude] = 0.0
-    """Sky latitude (degree)."""
-
-    ref_longitude: Dataof[RefLongitude] = 0.0
-    """Reference sky longitude (degree)."""
-
-    ref_latitude: Dataof[RefLatitude] = 0.0
-    """Reference sky latitude (degree)."""
-
-    frame: Dataof[Frame] = "RADEC"
+    frame: Attr[str]
     """Sky coordinate frame."""
-
-    time: Coordof[Time] = "2000-01-01"
-    """Time in UTC."""
 
 
 # runtime functions
