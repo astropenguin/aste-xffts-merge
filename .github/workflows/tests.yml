@@ -10,26 +10,21 @@ on:
 
 jobs:
   job:
-    name: Test (Python ${{ matrix.python-version }})
+    name: Test (Python ${{ matrix.python }})
     runs-on: ubuntu-latest
+    env:
+      POETRY_VIRTUALENVS_CREATE: false
     strategy:
       matrix:
-        python-version: [3.8, 3.9]
-    env:
-      TESTED_DIRS: aste_xffts_merge tests
+        python: ["3.8", "3.9"]
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          pip install poetry
-          poetry install
-      - name: Test code format (Black)
-        run: poetry run black --check ${TESTED_DIRS}
-      - name: Test code style (Flake8)
-        run: poetry run flake8 ${TESTED_DIRS}
-      - name: Test package (pytest)
-        run : poetry run pytest -v tests
+          python-version: ${{ matrix.python }}
+      - name: Install project dependencies
+        run: pip install poetry && poetry install
+      - name: Test code's formatting (Black)
+        run: black --check aste_xffts_merge tests
+      - name: Test code's execution (pytest)
+        run: pytest -v tests
